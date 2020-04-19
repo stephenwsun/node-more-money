@@ -1,0 +1,27 @@
+{
+  "name": "more-money",
+  "version": "1.0.0",
+  "description": "Node.js service used for tracking expenses and budgeting.",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "node-fetch": "^2.6.0",
+    "plaid": "^4.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3",
+    "prettier": "^2.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -r esm src/server.js",
+    "start": "node -r esm src/server.js"
+  },
+  "author": "Stephen Sun",
+  "license": "ISC"
+}
