@@ -1,10 +1,13 @@
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+import database from './db/database'
 import auth from './auth/auth.route'
 import transactions from './transaction/transaction.route'
 
 const app = express()
+
+database.init()
 
 app.use(cors())
 app.options('*', cors())
