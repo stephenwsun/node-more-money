@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import database from './db/database'
 import auth from './auth/auth.route'
 import transactions from './transaction/transaction.route'
+import balances from './balance/balance.route'
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/auth', auth)
 app.use('/transactions', transactions)
+app.use('/balances', balances)
 
 app.all('*', (req, res) => {
   res.status(404).send({
