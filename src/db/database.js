@@ -1,12 +1,28 @@
+import Sequelize from 'sequelize'
+
 class Database {
   constructor() {}
 
-  init() {
-    this.pg = require('knex')({
-      client: 'pg',
-      connection: process.env.PG_CONNECTION_STRING,
-      searchPath: ['knex', 'public'],
+  async init() {
+    this.sequelize = new Sequelize(process.env.PG_CONNECTION_STRING, {
+      dialect: 'postgres',
+      dialectOptions: {
+        ssl: true,
+      },
+      pool: {
+        max: 10,
+        min: 0,
+        acquire: 30000,
+        idle: 10000,
+      },
     })
+
+    try {
+      await this.sequelize.authenticate()
+      console.log('PostgreSQL connection has been established successfully')
+    } catch (err) {
+      console.error('Unable to connect to the database', err)
+    }
   }
 }
 

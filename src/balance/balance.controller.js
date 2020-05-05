@@ -1,10 +1,10 @@
-import plaidClient from '../plaid'
+import plaid from '../plaid/plaid.service'
 
 const balanceController = {}
 
 balanceController.getBalances = (req, res) => {
-  plaidClient.getAccounts(req.header('Authorization'))
-  plaidClient.getBalance(req.header('Authorization'))
+  plaid.client.getAccounts(req.header('Authorization'))
+  plaid.client.getBalance(req.header('Authorization'))
 }
 
 export default balanceController

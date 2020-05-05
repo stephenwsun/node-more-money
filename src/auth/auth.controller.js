@@ -1,4 +1,4 @@
-import plaidClient from '../plaid'
+import plaidClient from '../plaid/plaid.service'
 
 const authController = {}
 
