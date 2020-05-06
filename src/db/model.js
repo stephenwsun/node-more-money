@@ -125,30 +125,45 @@ class Model {
       Object.assign({}, uniqueBalance, options)
     )
 
-    this.Transaction = sequelize.define('transactions', {
-      id: {
-        type: Sequelize.STRING,
-        primaryKey: true,
-      },
-      amount: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      plaidAccountId: {
-        type: Sequelize.STRING,
-        references: {
-          model: this.Account,
+    this.Transaction = sequelize.define(
+      'transactions',
+      {
+        id: {
+          type: Sequelize.STRING,
+          primaryKey: true,
         },
-        field: 'plaid_account_id',
-      },
-      categories: {
-        type: Sequelize.STRING,
-        validate: {
-          isJson(string) {
-            string & JSON.parse(string)
+        amount: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        plaidAccountId: {
+          type: Sequelize.STRING,
+          references: {
+            model: this.Account,
+          },
+          field: 'plaid_account_id',
+        },
+        categories: {
+          type: Sequelize.STRING,
+          validate: {
+            isJson(string) {
+              string & JSON.parse(string)
+            },
           },
         },
       },
-    })
+      options
+    )
+
+    this.User.hasMany(this.Item)
+    this.Item.hasMany(this.Account)
+    this.Account.hasMany(this.Transaction)
+    this.Account.hasMany(this.BalanceHistory)
+    this.Item.belongsTo(this.User)
+    this.Account.belongsTo(this.Item)
+    this.Transaction.belongsTo(this.Account)
+    this.BalanceHistory.belongsTo(this.Account)
   }
 }
+
+export default Model
