@@ -3,6 +3,6 @@ import transactionController from './transaction.controller'
 
 const router = express.Router()
 
-router.get('/', transactionController.getTransactions)
+router.get('/', transactionController.getTransactionsByDays)
 
 export default router

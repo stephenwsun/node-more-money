@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize'
+import database from './database'
 
 class Model {
   constructor(sequelize) {
@@ -166,4 +167,5 @@ class Model {
   }
 }
 
+const models = new Model(database.sequelize)
 export default Model
