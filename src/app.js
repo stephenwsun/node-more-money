@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import plaidClient from './plaid/plaid.service'
-import database from './db/database'
+
 import auth from './auth/auth.route'
 import institutions from './institution/institution.route'
 import accounts from './account/account.route'
@@ -17,8 +17,6 @@ plaidClient.init(
   config.plaidSandboxSecret,
   config.plaidPublicKey
 )
-
-database.init()
 
 app.use(cors())
 app.options('*', cors())

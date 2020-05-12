@@ -9,7 +9,7 @@ class Model {
       indexes: [
         {
           unique: true,
-          fields: ['date_of', 'account_id'],
+          fields: ['date_of', 'plaid_account_id'],
         },
       ],
     }
@@ -167,5 +167,6 @@ class Model {
   }
 }
 
-const models = new Model(database.sequelize)
+// const models = new Model(database.sequelize)
+// export default models
 export default Model

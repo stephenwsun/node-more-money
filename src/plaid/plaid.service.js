@@ -1,5 +1,10 @@
 import plaid from 'plaid'
 import moment from 'moment'
+import Model from './../db/model'
+import database from './../db/database'
+
+database.init()
+const models = new Model(database.sequelize)
 
 class PlaidClient {
   constructor() {}
@@ -20,6 +25,28 @@ class PlaidClient {
     )
     console.log('Items: ', items)
     return items
+  }
+
+  async getItem(accessToken) {
+    const itemData = await this.client.getItem(accessToken)
+    console.log('Item data: ', itemData)
+
+    // const itemId = itemData.item.item_id
+    const institutionId = itemData.item.institution_id
+
+    const institutionData = await this.client.getInstitutionById(institutionId)
+    console.log('Institution data: ', institutionData)
+    const institutionName = institutionData.institution.name
+    // Need to replace this with user id - add this info in JWT
+    const appUserId = 1
+
+    // Need to fix this
+    return models.Item.insert({
+      accessToken,
+      institutionId,
+      institutionName,
+      appUserId,
+    })
   }
 
   async getAccounts(accessTokens) {
